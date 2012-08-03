@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension">
+  <Product Id="34fa6277-bb2a-426e-a0ef-47eb7537ad48" Name="Mvcsetup" Language="!(loc.LANG)" Version="1.0.0.0" Manufacturer="!(loc.CompanyName)" UpgradeCode="f85e3451-5c72-4c11-9546-e608a20bd48e">
+    <Package InstallerVersion="200" Compressed="yes" />
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+    <?include Settings.wxi ?>
+    <?include Conditions.wxi?>
+    <?include WebSites.wxi?>
+
+    <Property Id="IISROOT" Value="#0">
+      <RegistrySearch Id="IISROOT" Type="raw" Root="HKLM" Key="Software\Microsoft\InetStp" Name="PathWWWRoot" />
+    </Property>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="PFiles">
+        <Directory Id="IISROOT" Name=".">
+          <Directory Id="INSTALLLOCATION" Name="Mvcsetup">
+            <!-- The component to define the Virtual Directory.-->
+            <Component Id="WebVirtualDirComponent" Guid="A720C1C9-1D8D-4941-976D-FB1C5C9EF8BB">
+              <!-- Define App Pool - identity if not set defaults to: ApplicationPoolIdentity -->
+              <!--<iis:WebAppPool Id="AppPool" Name="[VD][WEBSITE_ID]" ManagedRuntimeVersion="v4.0"
+                              IdleTimeout="0" RecycleMinutes="0" ManagedPipelineMode="integrated">
+              </iis:WebAppPool>-->
+
+              <iis:WebVirtualDir Id="VDir" Alias="MvcSetUp"
+                                 Directory="INSTALLLOCATION"
+                                 WebSite="DefaultWebSite">
+                <!--<iis:MimeMap Id="SilverlightMimeType" Extension=".xap"
+                             Type="application/x-silverlight-app" />-->
+                <!--<iis:WebApplication Id="MyWebAppApplication" WebAppPool="AppPool"  Name="MvcSetUpTest" />-->
+                <iis:WebApplication Id="MyWebAppApplication" Name="MvcSetUpTest" />
+                <!--<iis:WebDirProperties Id="MyWebSite_Properties" AnonymousAccess="yes"
+                                      WindowsAuthentication="no" DefaultDocuments="Default.aspx" />-->
+              </iis:WebVirtualDir>
+              <CreateFolder/>
+              <!-- Need to have to ensure created -->
+            </Component>
+            <!--<Component Id="EnableASPNet4Extension" Permanent="yes"
+                       Guid="C8CDAB96-5DDC-4B4C-AD7E-CD09B59F7813">
+              <CreateFolder/>
+              -->
+            <!-- Need to have to ensure created -->
+            <!--
+              <iis:WebServiceExtension Id="ASPNet4Extension" Group="ASP.NET v4.0.30319" Allow="yes"
+                                       File="[ASPNETISAPIDLL]" Description="ASP.NET v4.0.30319"
+                                       UIDeletable="no"/>
+            </Component>-->
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <iis:WebSite Id='DefaultWebSite' Description="Default Web Site" SiteId="*">
+      <iis:WebAddress Id="AllUnassigned" Port="80"/>
+    </iis:WebSite>
+
+    <!--<CustomAction Id="UpdateWebAppMapping" Directory="INSTALLLOCATION" Return="asyncNoWait"
+                  ExeCommand='[ASPNETREGIIS] -norestart -s "W3SVC/[WEBSITE_ID]/ROOT/[VD]"' />
+
+    <InstallExecuteSequence>
+      <Custom Action="UpdateWebAppMapping" After="InstallFinalize">ASPNETREGIIS AND NOT Installed</Custom>
+    </InstallExecuteSequence>-->
+
+    <Feature Id="ProductFeature" Title="Mvcsetup" Level="1">
+      <ComponentRef Id='WebVirtualDirComponent' />
+      <!--<ComponentRef Id='EnableASPNet4Extension'/>-->
+      <ComponentGroupRef Id="WixForMvc_Project" />
+      <ComponentGroupRef Id="Product.Generated" />
+    </Feature>
+  </Product>
+</Wix>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Id="LANG">1033</String>
+  <String Id="CompanyName">visual2000</String>
+  <String Id="IISVersion">IIS need a highter version</String>
+  <String Id="DotNet4">Need .net framework 4.0</String>
+  <String Id="RiaServices">Need to install wcfriaservice</String>
+</WixLocalization>

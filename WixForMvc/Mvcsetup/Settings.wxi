@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <Icon Id="Visual2000.ico" SourceFile="Source/Visual2000.ico"/>
+  <Property Id="COMPANYLOGO" Value="Visual2000.ico"/>
+</Include>

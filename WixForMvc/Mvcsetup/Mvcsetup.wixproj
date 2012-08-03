@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.5</ProductVersion>
+    <ProjectGuid>{04987661-16e9-4229-b727-29ee3a4f1a52}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>Mvcsetup</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+    <Cultures>en-US</Cultures>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Product.wxs" />
+    <Compile Include="WixForMvc.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WixForMvc\WixForMvc.csproj">
+      <Name>WixForMvc</Name>
+      <Project>{09f79d61-95c2-43c0-8374-f5b3138887d7}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+      <WebProject>True</WebProject>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="English.wxl" />
+    <EmbeddedResource Include="WixUI_zh-cn.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Conditions.wxi" />
+    <Content Include="Settings.wxi" />
+    <Content Include="Source\Visual2000.ico" />
+    <Content Include="WebSites.wxi" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Source" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixIIsExtension">
+      <HintPath>$(WixExtDir)\WixIIsExtension.dll</HintPath>
+      <Name>WixIIsExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <Target Name="BeforeBuild">
+    <MSBuild Projects="%(ProjectReference.FullPath)" Targets="Package" Properties="Configuration=$(Configuration);Platform=AnyCPU" Condition="'%(ProjectReference.WebProject)'=='True'" />
+    <PropertyGroup>
+      <LinkerBaseInputPaths>%(ProjectReference.RootDir)%(ProjectReference.Directory)obj\$(Configuration)\Package\PackageTmp\</LinkerBaseInputPaths>
+    </PropertyGroup>
+    <HeatDirectory OutputFile="%(ProjectReference.Filename).wxs" Directory="%(ProjectReference.RootDir)%(ProjectReference.Directory)obj\$(Configuration)\Package\PackageTmp\" DirectoryRefId="INSTALLLOCATION" ComponentGroupName="%(ProjectReference.Filename)_Project" AutogenerateGuids="true" SuppressCom="true" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" ToolPath="$(WixToolPath)" Condition="'%(ProjectReference.WebProject)'=='True'" />
+  </Target>
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension">
+  <Product Id="b3041a52-1090-4f7e-bdb5-3a4d0f879324" Name="IIsSetupTest" Language="1033" Version="1.0.0.0" Manufacturer="IIsSetupTest" UpgradeCode="05f44775-c53b-4874-95c8-cbb5f421cd0a">
+    <Package InstallerVersion="200" Compressed="yes" />
+
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+    <Property Id="IISROOT" Value="#0">
+      <RegistrySearch Id="IISROOT" Type="raw" Root="HKLM" Key="Software\Microsoft\InetStp" Name="PathWWWRoot" />
+    </Property>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="PFiles">
+        <Directory Id="IISROOT" Name=".">
+          <Directory Id="INSTALLLOCATION" Name="IIsSetupTest">
+            <Component Id="ProductComponent" Guid="db908e43-9e25-414b-bcff-a2ff7a42c881">
+              <File Id="default.htm" Name="default.htm" Source="default.htm" DiskId="1" KeyPath="yes"/>
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+      <Component Id="SFADirComponet" Guid="A4B1A178-B12E-46D0-94D8-C4953FC188F3">
+        <iis:WebVirtualDir Id="SFADir" Alias="TestDir" Directory="INSTALLLOCATION" WebSite="DefaultWebSite">
+          <iis:WebApplication Id="IIStest" Name="test"/>
+        </iis:WebVirtualDir>
+      </Component>
+    </Directory>
+
+    <iis:WebSite Id="DefaultWebSite" Description="Default Web Site" SiteId="*">
+      <iis:WebAddress Id="AllUnassigned" Port="80"/>
+    </iis:WebSite>
+
+    <Feature Id="ProductFeature" Title="IIsSetupTest" Level="1">
+      <ComponentRef Id="ProductComponent"/>
+      <ComponentRef Id="SFADirComponet"/>
+    </Feature>
+  </Product>
+</Wix>
