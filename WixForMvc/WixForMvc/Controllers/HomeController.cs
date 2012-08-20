@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Lib;
 
 namespace WixForMvc.Controllers
 {
@@ -10,7 +11,7 @@ namespace WixForMvc.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to kick-start your ASP.NET MVC application.";
+            ViewBag.Message = new Class1().GetString("Hello");
 
             return View();
         }

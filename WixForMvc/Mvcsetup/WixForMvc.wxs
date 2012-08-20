@@ -24,6 +24,12 @@
                 <Component Id="cmp22C466C5C56F3EFDFD6389488D02F78D" Guid="*">
                     <File Id="fil3ACE336C9163DEDAD6799861CEAF2F87" KeyPath="yes" Source="SourceDir\bin\EntityFramework.xml" />
                 </Component>
+                <Component Id="cmpF5485E259916D73AE37E71DE8136B6C2" Guid="*">
+                    <File Id="fil41FC28466AE0CCD6816C0408FDEA28B2" KeyPath="yes" Source="SourceDir\bin\Lib.dll" />
+                </Component>
+                <Component Id="cmp0433C811E18E239E9CE0CC9332F92D19" Guid="*">
+                    <File Id="fil7005AAD222850AEE6CD08FEBCAE91E4A" KeyPath="yes" Source="SourceDir\bin\Lib.pdb" />
+                </Component>
                 <Component Id="cmp48B5CE506D86BF39F5848F1D62F6CFAE" Guid="*">
                     <File Id="fil4A13ABF803EECCA5885EFAE4997322B4" KeyPath="yes" Source="SourceDir\bin\Microsoft.Web.Infrastructure.dll" />
                 </Component>
@@ -371,6 +377,8 @@
             <ComponentRef Id="cmpA426106E50E83F038FBE746C1E09504B" />
             <ComponentRef Id="cmp3D8F7A091348223A4D8D6B969300CBE5" />
             <ComponentRef Id="cmp22C466C5C56F3EFDFD6389488D02F78D" />
+            <ComponentRef Id="cmpF5485E259916D73AE37E71DE8136B6C2" />
+            <ComponentRef Id="cmp0433C811E18E239E9CE0CC9332F92D19" />
             <ComponentRef Id="cmp48B5CE506D86BF39F5848F1D62F6CFAE" />
             <ComponentRef Id="cmpCBBD857B6884D163CDBADD7367F6EAB5" />
             <ComponentRef Id="cmp4E2C1954CE4A051BFE753CD143342D0D" />

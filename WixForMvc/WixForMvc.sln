@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WixForMvc", "WixForMvc\WixF
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Mvcsetup", "Mvcsetup\Mvcsetup.wixproj", "{04987661-16E9-4229-B727-29EE3A4F1A52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Lib\Lib.csproj", "{2B36E6EC-25F1-4B43-A863-1AC5C4883884}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{04987661-16E9-4229-B727-29EE3A4F1A52}.Release|Mixed Platforms.Build.0 = Release|x86
 		{04987661-16E9-4229-B727-29EE3A4F1A52}.Release|x86.ActiveCfg = Release|x86
 		{04987661-16E9-4229-B727-29EE3A4F1A52}.Release|x86.Build.0 = Release|x86
+		{2B36E6EC-25F1-4B43-A863-1AC5C4883884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B36E6EC-25F1-4B43-A863-1AC5C4883884}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B36E6EC-25F1-4B43-A863-1AC5C4883884}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2B36E6EC-25F1-4B43-A863-1AC5C4883884}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2B36E6EC-25F1-4B43-A863-1AC5C4883884}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2B36E6EC-25F1-4B43-A863-1AC5C4883884}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B36E6EC-25F1-4B43-A863-1AC5C4883884}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B36E6EC-25F1-4B43-A863-1AC5C4883884}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2B36E6EC-25F1-4B43-A863-1AC5C4883884}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2B36E6EC-25F1-4B43-A863-1AC5C4883884}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
